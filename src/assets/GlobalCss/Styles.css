@@ -1,0 +1,48 @@
+a {
+  font-weight: 500;
+  color: #c8a96e;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #d1a759;
+}
+
+.lavishly-font {
+  font-family: Var(--lavishly-font);
+  font-weight: 400;
+}
+
+.pinyon-font {
+  font-family: Var(--pinyon-font);
+  font-weight: 400;
+}
+
+.italianno-font {
+  font-family: Var(--italianno-font);
+  font-weight: 400;
+}
+
+.bonheur-royale-font {
+  font-family: Var(--bonheur-royale-font);
+  font-weight: 400;
+}
+
+.windsong-font {
+  font-family: Var(--windsong-font);
+  font-weight: 400;
+}
+
+.love-light-font {
+  font-family: Var(--love-light-font);
+  font-weight: 400;
+}
+
+:root {
+  --lavishly-font: "Lavishly Yours", cursive;
+  --bonheur-royale-font: "Bonheur Royale", cursive;
+  --windsong-font: "WindSong", cursive;
+  --love-light-font: "Love Light", cursive;
+  --pinyon-font: "Pinyon Script", cursive;
+  --italianno-font: "Italianno", cursive;
+}
