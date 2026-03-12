@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import MountFuji from "../../assets/Img/FeatureImage/Mountains/Mount-Fuji.webp";
 import KailashMount from "../../assets/Img/FeatureImage/Mountains/himalaya-mountain-4.webp";
-import { MoveLeft, MoveRight } from "lucide-react";
+// import { MoveLeft, MoveRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+// import { VscArrowLeft, VscArrowRight } from "react-icons/vsc";
 
 function MasonaryGallery() {
   const allPages = [
@@ -61,12 +63,39 @@ function MasonaryGallery() {
         delay: "delay-[100ms]",
         img: KailashMount,
       },
+      {
+        id: "07",
+        category: "Mountain",
+        title: "Mt. Fuji",
+        span: "lg:row-span-2",
+        height: "h-[520px]",
+        delay: "delay-[900ms]",
+        img: MountFuji,
+      },
+      {
+        id: "08",
+        category: "Minimal",
+        title: "Still Frame",
+        span: "",
+        height: "h-[260px]",
+        delay: "delay-[100ms]",
+        img: KailashMount,
+      },
+      {
+        id: "09",
+        category: "Minimal",
+        title: "Still Frame",
+        span: "",
+        height: "h-[260px]",
+        delay: "delay-[100ms]",
+        img: KailashMount,
+      },
     ],
 
     // Page 2
     [
       {
-        id: "07",
+        id: "10",
         category: "Street",
         title: "Rush Hour",
         span: "lg:row-span-2",
@@ -75,7 +104,7 @@ function MasonaryGallery() {
         img: MountFuji,
       },
       {
-        id: "08",
+        id: "11",
         category: "Architecture",
         title: "Symmetry",
         span: "",
@@ -84,7 +113,7 @@ function MasonaryGallery() {
         img: KailashMount,
       },
       {
-        id: "09",
+        id: "12",
         category: "Ocean",
         title: "Tide Lines",
         span: "",
@@ -93,7 +122,7 @@ function MasonaryGallery() {
         img: KailashMount,
       },
       {
-        id: "10",
+        id: "13",
         category: "Forest",
         title: "Into the Woods",
         span: "lg:row-span-2",
@@ -102,7 +131,7 @@ function MasonaryGallery() {
         img: MountFuji,
       },
       {
-        id: "11",
+        id: "14",
         category: "Portrait",
         title: "Dusk Glow",
         span: "",
@@ -111,9 +140,36 @@ function MasonaryGallery() {
         img: KailashMount,
       },
       {
-        id: "12",
+        id: "15",
         category: "Minimal",
         title: "White Noise",
+        span: "",
+        height: "h-[260px]",
+        delay: "delay-[100ms]",
+        img: KailashMount,
+      },
+      {
+        id: "16",
+        category: "Mountain",
+        title: "Mt. Fuji",
+        span: "lg:row-span-2",
+        height: "h-[520px]",
+        delay: "delay-[900ms]",
+        img: MountFuji,
+      },
+      {
+        id: "17",
+        category: "Minimal",
+        title: "Still Frame",
+        span: "",
+        height: "h-[260px]",
+        delay: "delay-[100ms]",
+        img: KailashMount,
+      },
+      {
+        id: "18",
+        category: "Minimal",
+        title: "Still Frame",
         span: "",
         height: "h-[260px]",
         delay: "delay-[100ms]",
@@ -124,7 +180,7 @@ function MasonaryGallery() {
     // Page 3
     [
       {
-        id: "13",
+        id: "19",
         category: "Desert",
         title: "Sand Drift",
         span: "lg:row-span-2",
@@ -133,7 +189,7 @@ function MasonaryGallery() {
         img: MountFuji,
       },
       {
-        id: "14",
+        id: "20",
         category: "Night",
         title: "City Pulse",
         span: "",
@@ -142,7 +198,7 @@ function MasonaryGallery() {
         img: KailashMount,
       },
       {
-        id: "15",
+        id: "21",
         category: "Winter",
         title: "First Snow",
         span: "",
@@ -151,7 +207,7 @@ function MasonaryGallery() {
         img: KailashMount,
       },
       {
-        id: "16",
+        id: "22",
         category: "Aerial",
         title: "Overhead",
         span: "lg:row-span-2",
@@ -160,7 +216,7 @@ function MasonaryGallery() {
         img: MountFuji,
       },
       {
-        id: "17",
+        id: "23",
         category: "Portrait",
         title: "Midday",
         span: "",
@@ -169,9 +225,36 @@ function MasonaryGallery() {
         img: KailashMount,
       },
       {
-        id: "18",
+        id: "24",
         category: "Abstract",
         title: "Formless",
+        span: "",
+        height: "h-[260px]",
+        delay: "delay-[100ms]",
+        img: KailashMount,
+      },
+      {
+        id: "25",
+        category: "Mountain",
+        title: "Mt. Fuji",
+        span: "lg:row-span-2",
+        height: "h-[520px]",
+        delay: "delay-[900ms]",
+        img: MountFuji,
+      },
+      {
+        id: "26",
+        category: "Minimal",
+        title: "Still Frame",
+        span: "",
+        height: "h-[260px]",
+        delay: "delay-[100ms]",
+        img: KailashMount,
+      },
+      {
+        id: "27",
+        category: "Minimal",
+        title: "Still Frame",
         span: "",
         height: "h-[260px]",
         delay: "delay-[100ms]",
@@ -199,10 +282,10 @@ function MasonaryGallery() {
   return (
     <>
       <section className="pt-16 px-6 md:px-12 pb-8 flex justify-between items-baseline">
-        <p className="text-[16px] tracking-wide uppercase text-[#c0c0c0] font-mono animate-pulse">
+        <p className="text-[0.8rem] md:text-[1rem] lg:text-[1.12rem] tracking-wide uppercase text-[#c0c0c0] font-mono animate-pulse">
           Selected work &#x2010; 2026
         </p>
-        <p className="text-[16px] tracking-wide uppercase text-gold font-mono cursor-pointer">
+        <p className="text-[0.8rem] md:text-[1rem] lg:text-[1.12rem] tracking-wide uppercase text-gold font-mono cursor-pointer">
           View all &#x23CE;
         </p>
       </section>
@@ -216,13 +299,15 @@ function MasonaryGallery() {
           <div
             key={card.id}
             className={`group relative overflow-hidden cursor-pointer row-span-1 ${card.span} ${card.height} animate-[fadeUp_0.6s_ease_forwards]
-                          transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] ${card.delay}`}
+                          transition-all duration-900 ease-[cubic-bezier(0.16,1,0.3,1)] ${card.delay}`}
             style={{ transitionDelay: `${index * 80}ms` }}
           >
             <img
               src={card.img}
               alt={card.title}
-              className="w-full h-full object-cover scale-100 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
+              loading="lazy"
+              decoding="async"
+              className="w-full h-full object-cover scale-100 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110 will-change-transform"
             />
             <div
               className="absolute inset-0 opacity-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.85)_0%,transparent_50%)] 
@@ -249,19 +334,25 @@ function MasonaryGallery() {
       {/* Pagination */}
       <div className="flex items-center justify-center gap-6 pb-16">
         <button
-          onClick={() => changePage(Math.min(totalPages - 1, page + 1))}
+          onClick={() => changePage(Math.max(0, page - 1))}
           disabled={page === 0}
-          className="w-8 h-8 flex items-center justify-center text-[rgba(200,169,110,0.5)] hover:text-[rgb(200,169,110)] 
-                     disabled:opacity-20 disabled:cursor-not-allowed transition-colors duration-300 font-mono text-xs tracking-widest"
+          className="w-6 h-6 flex items-center justify-center rounded-full text-[0.65rem] text-[rgb(200,169,110)]
+  bg-white/5 hover:bg-white/10 transition
+  disabled:opacity-50"
         >
-          <MoveLeft />
+          {/* <ChevronLeft
+            size={20}
+            strokeWidth={2.5}
+            className={`text-[rgb(200,169,110)] ${page === 0 ? "opacity-40" : ""}`}
+          /> */}
+          &larr;
         </button>
         {Array.from({ length: totalPages }).map((_, i) => (
           <button
             key={i}
             onClick={() => changePage(i)}
-            className={`relative w-6 h-6 flex items-center justify-center font-mono text-[0.55rem] tracking-widest
-                        transition-all duration-300
+            className={`relative w-6 h-6 flex items-center justify-center font-mono text-[0.65rem] tracking-widest
+                        p-0 border-0 bg-transparent rounded-none transition-all duration-300
                         ${
                           i === page
                             ? "text-[rgb(200,169,110)]"
@@ -275,12 +366,16 @@ function MasonaryGallery() {
           </button>
         ))}
         <button
-          onClick={() => changePage((p) => Math.min(totalPages - 1, p + 1))}
+          onClick={() => changePage(Math.min(totalPages - 1, page + 1))}
           disabled={page === totalPages - 1}
-          className="w-8 h-8 flex items-center justify-center text-[rgba(200,169,110,0.5)] hover:text-[rgb(200,169,110)] 
-                     disabled:opacity-20 disabled:cursor-not-allowed transition-colors duration-300 font-mono text-xs tracking-widest"
+          className="w-6 h-6 flex items-center justify-center text-[0.65rem] text-[rgb(200,169,110)] rounded-full bg-white/5 hover:bg-white/10 transition"
         >
-          <MoveRight />
+          {/* <ChevronRight
+            size={20}
+            strokeWidth={2.5}
+            className="text-[rgb(200,169,110)]"
+          /> */}
+          &rarr;
         </button>
       </div>
     </>
