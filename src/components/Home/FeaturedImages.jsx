@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { CircleChevronLeft, CircleChevronRight } from "lucide-react";
+import { CircleChevronLeft, CircleChevronRight, OctagonX } from "lucide-react";
 import "../../assets/GlobalCss/Styles.css";
 
 function FeaturedImages() {
@@ -41,6 +41,7 @@ function FeaturedImages() {
 
   const positionRef = useRef(0);
   const [activeImage, setActiveImage] = useState(null);
+  const [isClosing, setIsClosing] = useState(false);
 
   useEffect(() => {
     let animation;
@@ -64,7 +65,7 @@ function FeaturedImages() {
   const scrollLeft = () => {
     positionRef.current += 200;
     if (trackRef.current) {
-      track.current.style.transform = `translateX(${positionRef.current}px)`;
+      trackRef.current.style.transform = `translateX(${positionRef.current}px)`;
     }
   };
 
@@ -75,10 +76,21 @@ function FeaturedImages() {
     }
   };
 
+  const closeModal = (e) => {
+    e?.stopPropagation();
+    setIsClosing(true);
+
+    setTimeout(() => {
+      setActiveImage(null);
+      setIsClosing(false);
+    }, 250);
+  };
+
   return (
     // ========== Section Name ==========
     <section className="relative w-full overflow-hidden pt-14 px-6 md:px-12 pb-14">
       {/* Background */}
+      {/* <div className="absolute inset-0 max-w-full transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] bg-linear-to-b from-[rgb(8,8,8,0.95%)] to-transparent"></div> */}
       <div className="absolute inset-0 opacity-[0.8] bg-linear-[135deg,rgb(10,5,0)_0%,rgb(26,15,0)_30%,rgb(45,26,0)_60%,rgb(10,5,0)_100%;]"></div>
       <div className="absolute inset-0 bg-[radial-gradient(at_60%_40%,rgba(139,69,19,0.3)_0%,transparent_60%)]"></div>
 
@@ -95,10 +107,10 @@ function FeaturedImages() {
         </p>
       </div>
 
-      <div className="verflow-hidden w-full">
-        <div ref={trackRef} className="flex gap-8 w-max will-change-tranform">
+      <div className="overflow-hidden w-full">
+        <div ref={trackRef} className="flex gap-8 w-max will-change-transform">
           {[...Slider, ...Slider].map((item, i) => (
-            <div className="w-80 aspect-square shrink-0">
+            <div key={i} className="w-80 aspect-square shrink-0">
               <img
                 src={item.src}
                 alt={item.label}
@@ -130,25 +142,32 @@ function FeaturedImages() {
       {activeImage && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md"
-          onClick={() => setActiveImage(null)}
+          onClick={closeModal}
         >
-          <div
-            className="relative max-w-5xl w-full px-6"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <img
-              src={activeImage.src}
-              alt={activeImage.label}
-              className="w-full rounded-2xl object-cover"
-            />
+          <div className="flex items-center justify-center w-full px-6">
+            <div
+              className={`relative max-w-3xl w-full aspect-square ${isClosing ? "zoom-out" : "zoom-in"}`}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={closeModal}
+                className="absolute top-4 right-4 z-50 w-10 h-10 flex items-center justify-center rounded-full bg-black/60 text-white text-xl hover:bg-black/80 transition"
+              >
+                <OctagonX size={30} />
+              </button>
 
-            {/* Description Gradient */}
-            <div className="absolute bottom-0 left-0 right-0 p-8 rounded-b-2xl bg-linear-to-t from-black/90 via-black/50 to-transparent">
-              <h3 className="text-2xl font-serif text-white mb-2">
-                {activeImage.label}
-              </h3>
+              <img
+                src={activeImage.src}
+                alt={activeImage.label}
+                className="w-full h-full rounded-2xl object-cover"
+              />
 
-              <p className="text-white/80">{activeImage.desc}</p>
+              <div className="absolute bottom-0 inset-x-0 p-8 rounded-b-2xl bg-linear-to-t from-black/90 via-black/50 to-transparent">
+                <h3 className="text-2xl font-serif text-white mb-2">
+                  {activeImage.label}
+                </h3>
+                <p className="text-white/80">{activeImage.desc}</p>
+              </div>
             </div>
           </div>
         </div>
