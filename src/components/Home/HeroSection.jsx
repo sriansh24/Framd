@@ -17,7 +17,7 @@ function HeroSection() {
       <div className="relative z-2 max-w-175">
         <p
           className="text-xs font-mono tracking-[0.35rem] uppercase mb-6 text-[rgb(200,169,110)] opacity-100
-              translate-x-0 transition-all duration-[1000ms] ease-[cubic-bezier(0.16,1,0.3,1)] delay-300"
+              translate-x-0 transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-300"
         >
           Photography • Exploration • Stories
         </p>
@@ -32,7 +32,7 @@ function HeroSection() {
 
         <p
           className="text-sm font-serif leading-[1.8] text-[rgb(107,100,96)] max-w-105 tracking-wide opacity-100 translate-y-0
-              transition-all duration-[1000ms] ease-[cubic-bezier(0.16,1,0.3,1)] delay-800"
+              transition-all duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] delay-800"
         >
           From wild landscapes to silent streets, every frame captures a story
           waiting to be told.
