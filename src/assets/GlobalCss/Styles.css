@@ -38,6 +38,17 @@ a:hover {
   font-weight: 400;
 }
 
+@keyframes zoomIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 :root {
   --lavishly-font: "Lavishly Yours", cursive;
   --bonheur-royale-font: "Bonheur Royale", cursive;
