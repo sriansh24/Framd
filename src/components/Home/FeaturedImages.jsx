@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { CircleChevronLeft, CircleChevronRight, OctagonX } from "lucide-react";
-import "../../assets/GlobalCss/Styles.css";
 
 function FeaturedImages() {
   const trackRef = useRef(null);
@@ -63,7 +62,7 @@ function FeaturedImages() {
     };
     animate();
     return () => cancelAnimationFrame(animation);
-  }, []);
+  }, [isPaused]);
 
   const scrollLeft = () => {
     positionRef.current += 200;
@@ -78,6 +77,18 @@ function FeaturedImages() {
       trackRef.current.style.transform = `translateX(${positionRef.current}px)`;
     }
   };
+
+  const showPrevImage = () => {
+    const currentIndex = Slider.findIndex((img) => img.id === activeImage.id);
+    const prevIndex = (currentIndex - 1 + Slider.length) % Slider.length;
+    setActiveImage(Slider[prevIndex]);
+  };
+
+  const showNextImage = () => {
+    const currentIndex = Slider.findIndex((img) => img.id === activeImage.id);
+    const nextIndex = (currentIndex + 1) % Slider.length;
+    setActiveImage(Slider[nextIndex]);
+  }
 
   useEffect(() => {
     if (activeImage) {
@@ -99,11 +110,11 @@ function FeaturedImages() {
 
   return (
     // ========== Section Name ==========
-    <section className="relative w-full overflow-hidden pt-14 px-6 md:px-12 pb-14">
+    <section className="relative w-full overflow-hidden pt-14 px-6 md:px-12 pb-14 isolate bg-[#080808]">
       {/* Background */}
-      <div className="absolute inset-0 bg-linear-to-b from-[rgb(8,8,8)] via-[rgb(15,10,5)] to-transparent"></div>
-      <div className="absolute inset-0 opacity-[0.8] bg-linear-[135deg,rgb(10,5,0)_0%,rgb(26,15,0)_30%,rgb(45,26,0)_60%,rgb(10,5,0)_100%;]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(at_60%_40%,rgba(139,69,19,0.3)_0%,transparent_60%)]"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#080808] via-[#080808] to-[#0a0500]"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,#0a0500_0%,#2b1400_35%,#4a2200_50%,#2b1400_65%,#0a0500_100%)]"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(212,138,43,0.22)_0%,transparent_70%)]"></div>
 
       {/* Content */}
       <div className="flex items-center justify-between">
@@ -113,7 +124,7 @@ function FeaturedImages() {
         >
           Featured Images
         </h2>
-        <p className="text-[0.8rem] md:text-[1rem] lg:text-[1.12rem] tracking-wide uppercase text-gold font-mono cursor-pointer">
+        <p className="text-[0.8rem] md:text-[1rem] lg:text-[1.12rem] tracking-wide uppercase text-gold font-mono cursor-pointer drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]">
           View all &#x23CE;
         </p>
       </div>
@@ -157,7 +168,7 @@ function FeaturedImages() {
       {/* Zoom Effect */}
       {activeImage && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md"
+          className="fixed inset-0 z-[999] flex items-center justify-center bg-black/80 backdrop-blur-md"
           onClick={closeModal}
         >
           <div className="flex items-center justify-center w-full px-6">
@@ -170,7 +181,7 @@ function FeaturedImages() {
                   e.stopPropagation();
                   closeModal();
                 }}
-                className="absolute top-4 right-4 z-100 w-10 h-10 flex items-center justify-center rounded-full bg-black/60 text-white hover:bg-black/80 transition"
+                className="absolute top-4 right-4 z-[100] w-10 h-10 flex items-center justify-center rounded-full bg-black/60 text-white hover:bg-black/80 transition"
               >
                 <OctagonX size={30} />
               </button>
@@ -184,7 +195,7 @@ function FeaturedImages() {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  scrollLeft();
+                  showPrevImage();
                 }}
                 className="absolute left-8 top-1/2 -translate-y-1/2 z-50"
               >
@@ -194,7 +205,7 @@ function FeaturedImages() {
               <button
                 onClick={(e) => {
                   e.stopPropagation();
-                  scrollRight();
+                  showNextImage();
                 }}
                 className="absolute right-8 top-1/2 -translate-y-1/2 z-50"
               >

@@ -281,7 +281,7 @@ function MasonaryGallery() {
 
   return (
     <>
-      <section className="pt-16 px-6 md:px-12 pb-8 flex justify-between items-baseline">
+      <section className="pt-16 px-6 md:px-12 pb-8 flex justify-between items-baseline bg-[#080808]">
         <p className="text-[0.8rem] md:text-[1rem] lg:text-[1.12rem] tracking-wide uppercase text-[#c0c0c0] font-mono animate-pulse">
           Selected work &#x2010; 2026
         </p>
