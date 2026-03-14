@@ -15,7 +15,7 @@ function MainLayoutHeader() {
       >
         <Link
           to="/framd/home"
-          className="text-white uppercase text-2xl font-semibold tracking-widest font-(family-name:--love-light-font)"
+          className="text-gold capitalized text-2xl md:text-4xl lg:text-6xl xl:text-7xl font-bold tracking-widest font-(family-name:--tangerine-font)"
         >
           Framd
         </Link>
