@@ -40,6 +40,7 @@ function FeaturedImages() {
   ];
 
   const positionRef = useRef(0);
+  const [isPaused, setIsPaused] = useState(false);
   const [activeImage, setActiveImage] = useState(null);
   const [isClosing, setIsClosing] = useState(false);
 
@@ -49,12 +50,14 @@ function FeaturedImages() {
     const speed = 0.3;
 
     const animate = () => {
-      positionRef.current -= speed;
-      if (trackRef.current) {
-        trackRef.current.style.transform = `translateX(${positionRef.current}px)`;
-      }
-      if (Math.abs(positionRef.current) >= trackRef.current.scrollWidth / 2) {
-        positionRef.current = 0;
+      if (!isPaused) {
+        positionRef.current -= speed;
+        if (trackRef.current) {
+          trackRef.current.style.transform = `translateX(${positionRef.current}px)`;
+        }
+        if (Math.abs(positionRef.current) >= trackRef.current.scrollWidth / 2) {
+          positionRef.current = 0;
+        }
       }
       animation = requestAnimationFrame(animate);
     };
@@ -76,6 +79,14 @@ function FeaturedImages() {
     }
   };
 
+  useEffect(() => {
+    if (activeImage) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [activeImage]);
+
   const closeModal = (e) => {
     e?.stopPropagation();
     setIsClosing(true);
@@ -90,7 +101,7 @@ function FeaturedImages() {
     // ========== Section Name ==========
     <section className="relative w-full overflow-hidden pt-14 px-6 md:px-12 pb-14">
       {/* Background */}
-      {/* <div className="absolute inset-0 max-w-full transition-all duration-800 ease-[cubic-bezier(0.16,1,0.3,1)] bg-linear-to-b from-[rgb(8,8,8,0.95%)] to-transparent"></div> */}
+      <div className="absolute inset-0 bg-linear-to-b from-[rgb(8,8,8)] via-[rgb(15,10,5)] to-transparent"></div>
       <div className="absolute inset-0 opacity-[0.8] bg-linear-[135deg,rgb(10,5,0)_0%,rgb(26,15,0)_30%,rgb(45,26,0)_60%,rgb(10,5,0)_100%;]"></div>
       <div className="absolute inset-0 bg-[radial-gradient(at_60%_40%,rgba(139,69,19,0.3)_0%,transparent_60%)]"></div>
 
@@ -108,7 +119,12 @@ function FeaturedImages() {
       </div>
 
       <div className="overflow-hidden w-full">
-        <div ref={trackRef} className="flex gap-8 w-max will-change-transform">
+        <div
+          ref={trackRef}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          className="flex gap-8 w-max will-change-transform"
+        >
           {[...Slider, ...Slider].map((item, i) => (
             <div key={i} className="w-80 aspect-square shrink-0">
               <img
@@ -150,8 +166,11 @@ function FeaturedImages() {
               onClick={(e) => e.stopPropagation()}
             >
               <button
-                onClick={closeModal}
-                className="absolute top-4 right-4 z-50 w-10 h-10 flex items-center justify-center rounded-full bg-black/60 text-white text-xl hover:bg-black/80 transition"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  closeModal();
+                }}
+                className="absolute top-4 right-4 z-100 w-10 h-10 flex items-center justify-center rounded-full bg-black/60 text-white hover:bg-black/80 transition"
               >
                 <OctagonX size={30} />
               </button>
@@ -161,6 +180,26 @@ function FeaturedImages() {
                 alt={activeImage.label}
                 className="w-full h-full rounded-2xl object-cover"
               />
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  scrollLeft();
+                }}
+                className="absolute left-8 top-1/2 -translate-y-1/2 z-50"
+              >
+                <CircleChevronLeft size={40} className="text-gold" />
+              </button>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  scrollRight();
+                }}
+                className="absolute right-8 top-1/2 -translate-y-1/2 z-50"
+              >
+                <CircleChevronRight size={40} className="text-gold" />
+              </button>
 
               <div className="absolute bottom-0 inset-x-0 p-8 rounded-b-2xl bg-linear-to-t from-black/90 via-black/50 to-transparent">
                 <h3 className="text-2xl font-serif text-white mb-2">
