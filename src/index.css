@@ -1,9 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
 @import "tailwindcss";
 
 @theme {
   --color-gold: #c8a96e;
   --color-gold-light: #d4bc8a;
   --color-gold-dark: #a8894e;
+  --font-playfair: "Playfair Display", serif;
+  --font-cormorant: "Cormorant Garamond", serif;
+  --font-fell: "IM Fell English", serif;
 }
 
 :root {

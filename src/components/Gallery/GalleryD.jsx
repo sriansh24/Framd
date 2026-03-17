@@ -1,253 +1,382 @@
-import { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 
-const photos = [
-  { id: 1, ratio: "tall", category: "Portrait", title: "Golden Hour", bg: "linear-gradient(135deg, #1a0a00 0%, #4a2800 40%, #8b4513 100%)" },
-  { id: 2, ratio: "wide", category: "Landscape", title: "Fog & Silence", bg: "linear-gradient(135deg, #0a0f1a 0%, #1a2a3a 50%, #2d4a6b 100%)" },
-  { id: 3, ratio: "square", category: "Urban", title: "Concrete Dream", bg: "linear-gradient(135deg, #1a1a1a 0%, #3a3a3a 50%, #5a5a5a 100%)" },
-  { id: 4, ratio: "tall", category: "Nature", title: "After Rain", bg: "linear-gradient(135deg, #001a0a 0%, #003a1a 40%, #005a2a 100%)" },
-  { id: 5, ratio: "wide", category: "Portrait", title: "Caught Light", bg: "linear-gradient(135deg, #1a0a1a 0%, #3a1a3a 50%, #6b2d6b 100%)" },
-  { id: 6, ratio: "square", category: "Minimal", title: "Just Space", bg: "linear-gradient(135deg, #0a0a0f 0%, #1a1a2a 50%, #2a2a4a 100%)" },
-];
-
-const navItems = ["Work", "Series", "About", "Contact"];
-
-export default function Gallery() {
-  const [hoveredPhoto, setHoveredPhoto] = useState(null);
-  const [activeNav, setActiveNav] = useState("Work");
-  const [loaded, setLoaded] = useState(false);
-  const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
-  const [showCursor, setShowCursor] = useState(false);
-  const heroRef = useRef(null);
-
-  useEffect(() => {
-    setTimeout(() => setLoaded(true), 100);
-    const handleMouse = (e) => setCursorPos({ x: e.clientX, y: e.clientY });
-    window.addEventListener("mousemove", handleMouse);
-    return () => window.removeEventListener("mousemove", handleMouse);
-  }, []);
-
+// ── Shared hover-caption overlay ──────────────
+function PhotoCaption({ label }) {
   return (
-    <div style={{ fontFamily: "'Georgia', 'Times New Roman', serif", background: "#080808", minHeight: "100vh", color: "#e8e0d4", overflow: "hidden", position: "relative" }}>
-
-      {/* Custom cursor dot */}
-      {showCursor && (
-        <div style={{
-          position: "fixed", left: cursorPos.x - 4, top: cursorPos.y - 4,
-          width: 8, height: 8, borderRadius: "50%", background: "#c8a96e",
-          pointerEvents: "none", zIndex: 9999, transition: "transform 0.1s ease",
-          mixBlendMode: "difference"
-        }} />
-      )}
-
-      {/* Grain overlay */}
-      <div style={{
-        position: "fixed", inset: 0, zIndex: 1, pointerEvents: "none",
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E")`,
-        opacity: 0.6
-      }} />
-
-      {/* NAV */}
-      <nav style={{
-        position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
-        display: "flex", justifyContent: "space-between", alignItems: "center",
-        padding: "2rem 3rem",
-        opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(-20px)",
-        transition: "all 0.8s cubic-bezier(0.16, 1, 0.3, 1)",
-        background: "linear-gradient(to bottom, rgba(8,8,8,0.95) 0%, transparent 100%)",
-      }}>
-        <div style={{ letterSpacing: "0.25em", fontSize: "0.7rem", textTransform: "uppercase", color: "#c8a96e", fontFamily: "monospace" }}>
-          A. MARCELLO
-        </div>
-        <div style={{ display: "flex", gap: "2.5rem", alignItems: "center" }}>
-          {navItems.map(item => (
-            <button key={item} onClick={() => setActiveNav(item)} style={{
-              background: "none", border: "none", cursor: "pointer",
-              fontFamily: "inherit", fontSize: "0.75rem", letterSpacing: "0.15em",
-              textTransform: "uppercase", color: activeNav === item ? "#c8a96e" : "#6b6460",
-              transition: "color 0.3s ease", padding: 0,
-              borderBottom: activeNav === item ? "1px solid #c8a96e" : "1px solid transparent",
-              paddingBottom: "2px"
-            }}>{item}</button>
-          ))}
-        </div>
-      </nav>
-
-      {/* HERO */}
-      <div ref={heroRef} style={{ position: "relative", height: "100vh", display: "flex", alignItems: "flex-end", padding: "0 3rem 4rem" }}
-        onMouseEnter={() => setShowCursor(true)} onMouseLeave={() => setShowCursor(false)}>
-
-        {/* Hero background photo simulation */}
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(135deg, #0a0500 0%, #1a0f00 30%, #2d1a00 60%, #0a0500 100%)",
-          opacity: 0.8
-        }} />
-        <div style={{
-          position: "absolute", inset: 0,
-          background: "radial-gradient(ellipse at 60% 40%, rgba(139,69,19,0.3) 0%, transparent 60%)"
-        }} />
-
-        {/* Animated vertical lines */}
-        {[15, 35, 65, 85].map((pos, i) => (
-          <div key={i} style={{
-            position: "absolute", top: 0, left: `${pos}%`, width: "1px", height: "100%",
-            background: "rgba(200,169,110,0.06)",
-            opacity: loaded ? 1 : 0,
-            transition: `opacity 1.5s ease ${i * 0.2}s`
-          }} />
-        ))}
-
-        <div style={{ position: "relative", zIndex: 2, maxWidth: "700px" }}>
-          <div style={{
-            fontSize: "0.65rem", letterSpacing: "0.3em", textTransform: "uppercase",
-            color: "#c8a96e", marginBottom: "1.5rem", fontFamily: "monospace",
-            opacity: loaded ? 1 : 0, transform: loaded ? "translateX(0)" : "translateX(-30px)",
-            transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s"
-          }}>
-            Documentary — Portrait — Landscape
-          </div>
-          <h1 style={{
-            fontSize: "clamp(3.5rem, 8vw, 7rem)", fontWeight: 400, lineHeight: 0.9,
-            margin: "0 0 2rem", letterSpacing: "-0.02em",
-            opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(40px)",
-            transition: "all 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.5s"
-          }}>
-            The world,<br />
-            <span style={{ color: "#c8a96e", fontStyle: "italic" }}>witnessed.</span>
-          </h1>
-          <p style={{
-            fontSize: "0.9rem", lineHeight: 1.8, color: "#6b6460", maxWidth: "380px",
-            letterSpacing: "0.02em",
-            opacity: loaded ? 1 : 0, transform: loaded ? "translateY(0)" : "translateY(20px)",
-            transition: "all 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s"
-          }}>
-            Fine art photography exploring light, time, and the quiet drama of everyday existence.
-          </p>
-        </div>
-
-        {/* Scroll indicator */}
-        <div style={{
-          position: "absolute", bottom: "2.5rem", right: "3rem",
-          display: "flex", flexDirection: "column", alignItems: "center", gap: "0.75rem",
-          opacity: loaded ? 1 : 0, transition: "opacity 1s ease 1.5s"
-        }}>
-          <div style={{ fontSize: "0.55rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#4a4440", writingMode: "vertical-rl" }}>scroll</div>
-          <div style={{
-            width: "1px", height: "50px", background: "linear-gradient(to bottom, #c8a96e, transparent)",
-            animation: "pulse 2s ease-in-out infinite"
-          }} />
-        </div>
-      </div>
-
-      {/* SECTION LABEL */}
-      <div style={{
-        padding: "4rem 3rem 2rem",
-        display: "flex", justifyContent: "space-between", alignItems: "baseline"
-      }}>
-        <div style={{ fontSize: "0.6rem", letterSpacing: "0.3em", textTransform: "uppercase", color: "#3a3430", fontFamily: "monospace" }}>
-          Selected Work — 2024
-        </div>
-        <div style={{ fontSize: "0.6rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "#c8a96e", fontFamily: "monospace", cursor: "pointer" }}>
-          View All →
-        </div>
-      </div>
-
-      {/* MASONRY GRID */}
-      <div style={{
-        padding: "0 3rem 6rem",
-        display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
-        gridTemplateRows: "auto",
-        gap: "1.5rem",
+    <div
+      className="absolute bottom-0 left-0 right-0 z-10
+                 flex items-end justify-center
+                 opacity-0 translate-y-2
+                 group-hover:opacity-100 group-hover:translate-y-0
+                 transition-all duration-500 ease-out
+                 pb-3 pt-10 text-center"
+      style={{
+        background:
+          "linear-gradient(to top, rgba(10,5,0,0.92) 0%, transparent 100%)",
       }}
-        onMouseEnter={() => setShowCursor(true)} onMouseLeave={() => setShowCursor(false)}>
-        {photos.map((photo, i) => (
-          <div
-            key={photo.id}
-            onMouseEnter={() => setHoveredPhoto(photo.id)}
-            onMouseLeave={() => setHoveredPhoto(null)}
-            style={{
-              position: "relative", overflow: "hidden", cursor: "none",
-              gridRow: photo.ratio === "tall" ? "span 2" : photo.ratio === "wide" ? "span 1" : "span 1",
-              height: photo.ratio === "tall" ? "520px" : photo.ratio === "wide" ? "260px" : "260px",
-              opacity: loaded ? 1 : 0,
-              transform: loaded ? "translateY(0)" : "translateY(40px)",
-              transition: `all 0.9s cubic-bezier(0.16, 1, 0.3, 1) ${0.9 + i * 0.1}s`,
-            }}>
-            {/* Photo placeholder */}
-            <div style={{
-              width: "100%", height: "100%",
-              background: photo.bg,
-              transform: hoveredPhoto === photo.id ? "scale(1.04)" : "scale(1)",
-              transition: "transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)"
-            }}>
-              {/* Simulated photo content */}
-              <div style={{
-                position: "absolute", inset: 0,
-                background: `radial-gradient(ellipse at ${30 + i * 15}% ${40 + i * 10}%, rgba(255,255,255,0.08) 0%, transparent 50%)`
-              }} />
-            </div>
-
-            {/* Hover overlay */}
-            <div style={{
-              position: "absolute", inset: 0,
-              background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 50%)",
-              opacity: hoveredPhoto === photo.id ? 1 : 0,
-              transition: "opacity 0.4s ease"
-            }} />
-
-            {/* Photo info */}
-            <div style={{
-              position: "absolute", bottom: 0, left: 0, right: 0, padding: "1.5rem",
-              transform: hoveredPhoto === photo.id ? "translateY(0)" : "translateY(10px)",
-              opacity: hoveredPhoto === photo.id ? 1 : 0,
-              transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)"
-            }}>
-              <div style={{ fontSize: "0.55rem", letterSpacing: "0.25em", textTransform: "uppercase", color: "#c8a96e", marginBottom: "0.4rem", fontFamily: "monospace" }}>
-                {photo.category}
-              </div>
-              <div style={{ fontSize: "1.1rem", fontWeight: 400, letterSpacing: "-0.01em" }}>
-                {photo.title}
-              </div>
-            </div>
-
-            {/* Corner number */}
-            <div style={{
-              position: "absolute", top: "1rem", right: "1rem",
-              fontSize: "0.55rem", letterSpacing: "0.2em", color: "rgba(200,169,110,0.5)",
-              fontFamily: "monospace"
-            }}>
-              {String(i + 1).padStart(2, "0")}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* FOOTER STRIP */}
-      <div style={{
-        borderTop: "1px solid #1a1714",
-        padding: "2rem 3rem",
-        display: "flex", justifyContent: "space-between", alignItems: "center"
-      }}>
-        <div style={{ fontSize: "0.6rem", letterSpacing: "0.2em", color: "#2a2420", fontFamily: "monospace" }}>
-          © 2024 A. MARCELLO — ALL RIGHTS RESERVED
-        </div>
-        <div style={{ display: "flex", gap: "2rem" }}>
-          {["Instagram", "Behance", "500px"].map(s => (
-            <span key={s} style={{ fontSize: "0.6rem", letterSpacing: "0.15em", color: "#3a3430", textTransform: "uppercase", cursor: "pointer", fontFamily: "monospace" }}>{s}</span>
-          ))}
-        </div>
-      </div>
-
-      <style>{`
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.3; }
-        }
-        * { box-sizing: border-box; }
-        body { margin: 0; }
-        button:hover { opacity: 1 !important; }
-      `}</style>
+    >
+      <span
+        className="text-sm italic tracking-widest"
+        style={{ fontFamily: "'Playfair Display', serif", color: "#e6b77e" }}
+      >
+        {label}
+      </span>
     </div>
   );
 }
+
+// ── Story text block ───────────────────────────
+function StoryContent({ label, title, body, byline }) {
+  return (
+    <div className="flex-1 min-w-0">
+      <p
+        className="mb-2 text-[0.65rem] uppercase tracking-[0.22em] opacity-70"
+        style={{ fontFamily: "'IM Fell English', serif", color: "#8b5e1a" }}
+      >
+        {label}
+      </p>
+      <h3
+        className="mb-3 font-bold leading-[1.1]"
+        style={{
+          fontFamily: "'Playfair Display', serif",
+          color: "#e6b77e",
+          fontSize: "clamp(1.25rem, 2.4vw, 2rem)",
+        }}
+      >
+        {title}
+      </h3>
+      <p
+        className="leading-[1.8] opacity-85"
+        style={{
+          fontFamily: "'Cormorant Garamond', serif",
+          fontWeight: 300,
+          fontSize: "clamp(0.95rem, 1.3vw, 1.1rem)",
+          color: "#e6b77e",
+        }}
+      >
+        {body}
+      </p>
+      <p
+        className="mt-4 text-[0.82rem] italic opacity-70 tracking-[0.04em]"
+        style={{ fontFamily: "'IM Fell English', serif", color: "#c9933a" }}
+      >
+        {byline}
+      </p>
+    </div>
+  );
+}
+
+// ── Gold rule divider ──────────────────────────
+function GoldRule() {
+  return (
+    <div
+      className="w-full h-px my-10 opacity-40"
+      style={{
+        background:
+          "linear-gradient(to right, transparent, #c9933a, transparent)",
+      }}
+    />
+  );
+}
+
+// ══ 1. SQUARE FRAME ═══════════════════════════
+function SquareFrame({ src, alt, caption }) {
+  return (
+    <div
+      className="relative group flex-shrink-0 overflow-hidden"
+      style={{
+        width: "clamp(200px, 28vw, 280px)",
+        height: "clamp(200px, 28vw, 280px)",
+        border: "2px solid #c9933a",
+        boxShadow:
+          "0 0 0 4px rgba(201,147,58,0.12), inset 0 0 0 4px rgba(201,147,58,0.06)",
+      }}
+    >
+      {/* Corner ornaments */}
+      <span
+        className="absolute top-[-4px] left-[-4px] w-[14px] h-[14px] z-10 opacity-70 pointer-events-none"
+        style={{ borderTop: "2px solid #e6b77e", borderLeft: "2px solid #e6b77e" }}
+      />
+      <span
+        className="absolute bottom-[-4px] right-[-4px] w-[14px] h-[14px] z-10 opacity-70 pointer-events-none"
+        style={{ borderBottom: "2px solid #e6b77e", borderRight: "2px solid #e6b77e" }}
+      />
+
+      <img
+        src={src}
+        alt={alt}
+        className="w-full h-full object-cover transition-transform duration-700 ease-out
+                   group-hover:scale-[1.06] group-hover:[filter:sepia(0.15)]"
+      />
+      <PhotoCaption label={caption} />
+    </div>
+  );
+}
+
+// ══ 2. CIRCLE FRAME ═══════════════════════════
+function CircleFrame({ src, alt, caption }) {
+  return (
+    <div
+      className="relative group flex-shrink-0 overflow-hidden rounded-full"
+      style={{
+        width: "clamp(200px, 28vw, 280px)",
+        height: "clamp(200px, 28vw, 280px)",
+        border: "2px solid #c9933a",
+        boxShadow:
+          "0 0 0 6px rgba(201,147,58,0.08), 0 0 30px rgba(201,147,58,0.1)",
+      }}
+    >
+      <img
+        src={src}
+        alt={alt}
+        className="w-full h-full object-cover transition-transform duration-700 ease-out
+                   group-hover:scale-[1.06] group-hover:[filter:sepia(0.15)]"
+      />
+      {/* Circle caption — clipped to bottom arc */}
+      <div
+        className="absolute bottom-0 left-0 right-0 z-10
+                   flex items-end justify-center
+                   opacity-0 translate-y-2
+                   group-hover:opacity-100 group-hover:translate-y-0
+                   transition-all duration-500 ease-out
+                   pb-5 pt-10 text-center"
+        style={{
+          background:
+            "linear-gradient(to top, rgba(10,5,0,0.92) 0%, transparent 100%)",
+          borderRadius: "0 0 50% 50%",
+        }}
+      >
+        <span
+          className="text-sm italic tracking-widest"
+          style={{ fontFamily: "'Playfair Display', serif", color: "#e6b77e" }}
+        >
+          {caption}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+// ══ 3. HEXAGON FRAME ══════════════════════════
+function HexFrame({ src, alt, caption }) {
+  const size = "clamp(200px, 28vw, 270px)";
+  const heightSize = "clamp(224px, 31.5vw, 302px)";
+
+  return (
+    <div
+      className="relative group flex-shrink-0"
+      style={{ width: size, height: heightSize }}
+    >
+      {/* SVG hex border */}
+      <svg
+        viewBox="0 0 260 290"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="absolute inset-0 w-full h-full z-20 pointer-events-none"
+      >
+        <polygon
+          points="130,4 254,69 254,221 130,286 6,221 6,69"
+          stroke="#c9933a"
+          strokeWidth="2"
+          fill="none"
+          opacity="0.85"
+        />
+        <polygon
+          points="130,10 248,73 248,217 130,280 12,217 12,73"
+          stroke="#c9933a"
+          strokeWidth="0.5"
+          fill="none"
+          opacity="0.25"
+        />
+      </svg>
+
+      {/* Clipped image */}
+      <div
+        className="absolute inset-[6px] overflow-hidden z-10"
+        style={{
+          clipPath:
+            "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
+        }}
+      >
+        <img
+          src={src}
+          alt={alt}
+          className="w-full h-full object-cover transition-transform duration-700 ease-out
+                     group-hover:scale-[1.06] group-hover:[filter:sepia(0.15)]"
+        />
+
+        {/* Hex caption — inside clip */}
+        <div
+          className="absolute bottom-0 left-0 right-0 z-10
+                     flex items-end justify-center
+                     opacity-0 translate-y-2
+                     group-hover:opacity-100 group-hover:translate-y-0
+                     transition-all duration-500 ease-out
+                     pb-8 pt-10 text-center"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(10,5,0,0.92) 0%, transparent 100%)",
+          }}
+        >
+          <span
+            className="text-sm italic tracking-widest"
+            style={{ fontFamily: "'Playfair Display', serif", color: "#e6b77e" }}
+          >
+            {caption}
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ══ MAIN COMPONENT ════════════════════════════
+function GalleryD() {
+  const stories = [
+    {
+      id: 1,
+      frame: "square",
+      layout: "photo-left", // photo left, content right
+      photo: {
+        src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+        alt: "Mountain Dawn",
+        caption: "Mountain Dawn",
+      },
+      content: {
+        label: "Chronicle I — The Summit",
+        title: "Where Silence Speaks in Gold",
+        body: "High above the treeline, where the air thins to a whisper and morning paints every ridge in molten copper, a single moment crystallises into memory. The mountain doesn't yield its story easily — it demands patience, a willingness to wait in cold darkness until the first light breaks.",
+        byline: "— Correspondent, High Altitude Desk · March 2026",
+      },
+    },
+    {
+      id: 2,
+      frame: "circle",
+      layout: "photo-right", // content left, photo right
+      photo: {
+        src: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?w=800&q=80",
+        alt: "Ocean Tide",
+        caption: "Ocean Tide",
+      },
+      content: {
+        label: "Chronicle II — The Sea",
+        title: "Tides That Remember Every Shore",
+        body: "The ocean holds the oldest archive known to earth. Each wave that curls onto ancient stone carries within it the memory of ten thousand storms, of ships that passed without names, of fishermen who read the water like a sacred text. To stand at its edge is to stand at the margin of all human story.",
+        byline: "— Maritime Features · March 2026",
+      },
+    },
+    {
+      id: 3,
+      frame: "hex",
+      layout: "photo-left", // photo left, content right
+      photo: {
+        src: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800&q=80",
+        alt: "Ancient Forest",
+        caption: "Ancient Forest",
+      },
+      content: {
+        label: "Chronicle III — The Forest",
+        title: "A Cathedral Built Without Hands",
+        body: "Deep in the old forest, where roots cross and light arrives in cathedral shafts through canopies centuries old, time moves differently. The trees do not measure years — they measure silences. Between storms, between seasons, between the footsteps of creatures that pass without knowing they walk through something sacred.",
+        byline: "— Natural World Desk · March 2026",
+      },
+    },
+  ];
+
+  return (
+    <section
+      className="relative w-full overflow-hidden pt-14 px-6 md:px-12 pb-14 isolate"
+      style={{ background: "rgba(139,69,19,0.12)" }}
+    >
+      {/* Dark background */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(180deg, #080808 0%, #080808 80%, #0a0500 100%)",
+          zIndex: 0,
+        }}
+      />
+
+      {/* ── Warm gold gradient from top (continuation) ── */}
+      <div
+        className="absolute top-0 left-0 right-0 pointer-events-none"
+        style={{
+          height: "200px",
+          background:
+            "linear-gradient(to bottom, rgba(201,147,58,0.18) 0%, rgba(201,147,58,0.06) 60%, transparent 100%)",
+          zIndex: 1,
+        }}
+      />
+
+      {/* Content */}
+      <div className="relative" style={{ zIndex: 2 }}>
+
+        {/* Section heading */}
+        <h2
+          className="mb-16 font-normal leading-[0.9] tracking-tight"
+          style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: "clamp(2rem, 6vw, 6rem)",
+            color: "#e6b77e",
+          }}
+        >
+          Where Moments
+          <br />
+          <span className="italic ml-7 pl-7" style={{ color: "#e6b77e" }}>
+            Become Stories...
+          </span>
+        </h2>
+
+        {/* Sub-sections */}
+        {stories.map((story, index) => (
+          <div key={story.id}>
+            {/* ── Sub-section row ── */}
+            <div
+              className={`
+                flex flex-col md:flex-row items-center gap-10 py-8
+                ${story.layout === "photo-right" ? "md:flex-row-reverse" : ""}
+              `}
+            >
+              {/* Photo */}
+              {story.frame === "square" && (
+                <SquareFrame
+                  src={story.photo.src}
+                  alt={story.photo.alt}
+                  caption={story.photo.caption}
+                />
+              )}
+              {story.frame === "circle" && (
+                <CircleFrame
+                  src={story.photo.src}
+                  alt={story.photo.alt}
+                  caption={story.photo.caption}
+                />
+              )}
+              {story.frame === "hex" && (
+                <HexFrame
+                  src={story.photo.src}
+                  alt={story.photo.alt}
+                  caption={story.photo.caption}
+                />
+              )}
+
+              {/* Content */}
+              <StoryContent
+                label={story.content.label}
+                title={story.content.title}
+                body={story.content.body}
+                byline={story.content.byline}
+              />
+            </div>
+
+            {/* Gold rule between sections (not after last) */}
+            {index < stories.length - 1 && <GoldRule />}
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+export default GalleryD;
