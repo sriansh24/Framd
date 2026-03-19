@@ -20,16 +20,16 @@ function MainLayoutHeader() {
           Framd
         </Link>
         <ul className="hidden md:flex gap-10 text-sm tracking-wider">
-          <li className="cursor-pointer border-transparent border-b-2 hover:border-[#d1a759] transition-all duration-300">
+          <li className="font-serif cursor-pointer border-transparent border-b-2 hover:border-[#d1a759] transition-all duration-300">
             <Link to="/framd/home">Home</Link>
           </li>
-          <li className="cursor-pointer border-transparent border-b-2 hover:border-[#d1a759] transition-all duration-300">
+          <li className="font-serif cursor-pointer border-transparent border-b-2 hover:border-[#d1a759] transition-all duration-300">
             <Link to="/framd/gallery">Gallery</Link>
           </li>
-          <li className="cursor-pointer border-transparent border-b-2 hover:border-[#d1a759] transition-all duration-300">
+          <li className="font-serif cursor-pointer border-transparent border-b-2 hover:border-[#d1a759] transition-all duration-300">
             <Link to="/framd/about-us">About Us</Link>
           </li>
-          <li className="cursor-pointer border-transparent border-b-2 hover:border-[#d1a759] transition-all duration-300">
+          <li className="font-serif cursor-pointer border-transparent border-b-2 hover:border-[#d1a759] transition-all duration-300">
             <Link to="/framd/contact-us">Contact Us</Link>
           </li>
         </ul>
@@ -42,7 +42,7 @@ function MainLayoutHeader() {
         </button>
       </div>
       {isOpen && (
-        <div className="md:hidden bg-black/90 text-white px-6 pb-6">
+        <div className="md:hidden bg-black/90 text-white px-6 py-6 font-serif">
           <ul className="flex flex-col gap-4">
             <li>
               <Link to="/framd/home" onClick={() => setIsOpen(false)}>

@@ -1,5 +1,6 @@
 import React from "react";
 import MainLayoutHeader from "../../layouts/Header/Header";
+import MainLayoutFooter from "../../layouts/Footer/Footer";
 import HeroSection from "../../components/Home/HeroSection";
 import MasonaryGallery from "../../components/Home/MasonaryGallery";
 import FeaturedImages from "../../components/Home/FeaturedImages";
@@ -15,6 +16,7 @@ function Home() {
       <FeaturedImages />
       <StoryTelling />
       <PremiumWork />
+      <MainLayoutFooter />
     </>
   );
 }
