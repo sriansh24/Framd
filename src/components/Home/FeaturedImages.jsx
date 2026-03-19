@@ -110,17 +110,16 @@ function FeaturedImages() {
 
   return (
     // ========== Section Name ==========
-    <section className="relative w-full overflow-hidden pt-14 px-6 md:px-12 pb-14 isolate bg-[#080808]">
+    <section className="relative w-full overflow-hidden pt-14 px-6 md:px-12 pb-14">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#080808] via-[#080808] to-[#0a0500]"></div>
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,#0a0500_0%,#2b1400_35%,#4a2200_50%,#2b1400_65%,#0a0500_100%)]"></div>
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(212,138,43,0.22)_0%,transparent_70%)]"></div>
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,#0a0500_0%,#1a0f00_30%,#2d1a00_60%,#0a0500_100%)] opacity-[0.8]" />
+      <div className="absolute inset-0 z-1 bg-[radial-gradient(at_60%_40%,rgba(139,69,19,0.3)_0%,transparent_60%)]" />
 
       {/* Content */}
       <div className="flex items-center justify-between">
         <h2
-          className="text-[1.563rem] sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-serif font-normal leading-[0.9] mb-12 tracking-tight 
-              opacity-100 translate-y-0 transition-all duration-1200 ease-[cubic-bezier(0.16,1,0.3,1)] delay-500"
+          className="text-[1.563rem] sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl  font-palatino italic font-normal leading-[0.9] mb-12 tracking-tight 
+              opacity-100 translate-y-0 transition-all duration-1200 ease-[cubic-bezier(0.16,1,0.3,1)] delay-500 text-gold-dark"
         >
           Featured Images
         </h2>
@@ -168,7 +167,7 @@ function FeaturedImages() {
       {/* Zoom Effect */}
       {activeImage && (
         <div
-          className="fixed inset-0 z-[999] flex items-center justify-center bg-black/80 backdrop-blur-md"
+          className="fixed inset-0 z-999 flex items-center justify-center bg-black/80 backdrop-blur-md"
           onClick={closeModal}
         >
           <div className="flex items-center justify-center w-full px-6">
@@ -181,7 +180,7 @@ function FeaturedImages() {
                   e.stopPropagation();
                   closeModal();
                 }}
-                className="absolute top-4 right-4 z-[100] w-10 h-10 flex items-center justify-center rounded-full bg-black/60 text-white hover:bg-black/80 transition"
+                className="absolute top-4 right-4 z-100 w-10 h-10 flex items-center justify-center rounded-full bg-black/60 text-white hover:bg-black/80 transition"
               >
                 <OctagonX size={30} />
               </button>

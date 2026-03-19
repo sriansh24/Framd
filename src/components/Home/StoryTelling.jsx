@@ -32,14 +32,14 @@ function StoryTelling() {
         <div className="absolute top-0 left-0 right-0 h-50 pointer-events-none z-1 bg-linear-to-b from-[rgba(201,147,58,0.18)] via-[rgba(201,147,58,0.06)] to-transparent" />
 
         {/* Section Name */}
-        <div className="relative z-20">
+        <div className="relative z-20 font-palatino italic text-gold-dark">
           <h2
-            className="text-[1.563rem] sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl font-serif font-normal leading-[0.9] mb-12 tracking-tight 
+            className="text-[1.563rem] sm:text-4xl md:text-5xl lg:text-7xl xl:text-8xl  font-palatino italic font-normal leading-[0.9] mb-12 tracking-tight 
               opacity-100 translate-y-0 transition-all duration-1200 ease-[cubic-bezier(0.16,1,0.3,1)] delay-500"
           >
             Where Moments
             <br />
-            <span className="italic text-gold ms-7 ps-7">
+            <span className="ms-7 ps-7">
               Become Stories...
             </span>
           </h2>
