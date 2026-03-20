@@ -1,22 +1,77 @@
-import React from "react";
+import React, { Suspense } from "react";
 import MainLayoutHeader from "../../layouts/Header/Header";
-import MainLayoutFooter from "../../layouts/Footer/Footer";
-import HeroSection from "../../components/Home/HeroSection";
-import MasonaryGallery from "../../components/Home/MasonaryGallery";
-import FeaturedImages from "../../components/Home/FeaturedImages";
-import StoryTelling from "../../components/Home/StoryTelling";
-import PremiumWork from "../../components/Home/PremiumWork";
+import LazySection from "../../common/LazySection";
+import ErrorBoundary from "../../common/ErrorBoundary";
+const MainLayoutFooter = React.lazy(
+  () => import("../../layouts/Footer/Footer"),
+);
+const HeroSection = React.lazy(
+  () => import("../../components/Home/HeroSection"),
+);
+const MasonaryGallery = React.lazy(
+  () => import("../../components/Home/MasonaryGallery"),
+);
+const FeaturedImages = React.lazy(
+  () => import("../../components/Home/FeaturedImages"),
+);
+const StoryTelling = React.lazy(
+  () => import("../../components/Home/StoryTelling"),
+);
+const PremiumWork = React.lazy(
+  () => import("../../components/Home/PremiumWork"),
+);
 
 function Home() {
   return (
     <>
       <MainLayoutHeader />
-      <HeroSection />
-      <MasonaryGallery />
-      <FeaturedImages />
-      <StoryTelling />
-      <PremiumWork />
-      <MainLayoutFooter />
+      <LazySection>
+        <ErrorBoundary>
+          <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
+            <HeroSection />
+          </Suspense>
+        </ErrorBoundary>
+      </LazySection>
+
+      <LazySection>
+        <ErrorBoundary>
+          <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
+            <MasonaryGallery />
+          </Suspense>
+        </ErrorBoundary>
+      </LazySection>
+
+      <LazySection>
+        <ErrorBoundary>
+          <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
+            <FeaturedImages />
+          </Suspense>
+        </ErrorBoundary>
+      </LazySection>
+
+      <LazySection>
+        <ErrorBoundary>
+          <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
+            <StoryTelling />
+          </Suspense>
+        </ErrorBoundary>
+      </LazySection>
+
+      <LazySection>
+        <ErrorBoundary>
+          <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
+            <PremiumWork />
+          </Suspense>
+        </ErrorBoundary>
+      </LazySection>
+
+      <LazySection>
+        <ErrorBoundary>
+          <Suspense fallback={<div className="text-center py-10">Loading...</div>}>
+            <MainLayoutFooter />
+          </Suspense>
+        </ErrorBoundary>
+      </LazySection>
     </>
   );
 }
