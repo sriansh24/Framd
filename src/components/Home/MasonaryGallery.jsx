@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { allPages } from "../../javascriptData/masonaryGalleryJs/masonaryGallery";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -26,9 +27,11 @@ function MasonaryGallery() {
         <p className="text-[0.8rem] md:text-[1rem] lg:text-[1.12rem] tracking-wide uppercase text-[#c0c0c0] font-mono animate-pulse">
           Selected work &#x2010; 2026
         </p>
-        <p className="text-[0.8rem] md:text-[1rem] lg:text-[1.12rem] tracking-wide uppercase text-gold font-mono cursor-pointer">
-          View all &#x23CE;
-        </p>
+        <Link to="/framd/gallery">
+          <p className="text-[0.8rem] md:text-[1rem] lg:text-[1.12rem] tracking-wide uppercase text-gold font-mono cursor-pointer">
+            View all &#x23CE;
+          </p>
+        </Link>
       </section>
 
       {/* Masonary Gallery */}
@@ -82,27 +85,21 @@ function MasonaryGallery() {
           onClick={() => changePage(Math.max(0, page - 1))}
           disabled={page === 0}
           className="w-6 h-6 flex items-center justify-center rounded-full text-[0.65rem] text-[rgb(200,169,110)]
-  bg-white/5 hover:bg-white/10 transition
-  disabled:opacity-50"
+                              bg-white/5 hover:bg-white/10 transition disabled:opacity-50 cursor-pointer"
         >
-          {/* <ChevronLeft
-            size={20}
-            strokeWidth={2.5}
-            className={`text-[rgb(200,169,110)] ${page === 0 ? "opacity-40" : ""}`}
-          /> */}
-          &larr;
+          <ChevronLeft />
         </button>
         {Array.from({ length: totalPages }).map((_, i) => (
           <button
             key={i}
             onClick={() => changePage(i)}
             className={`relative w-6 h-6 flex items-center justify-center font-mono text-[0.65rem] tracking-widest
-                        p-0 border-0 bg-transparent rounded-none transition-all duration-300
-                        ${
-                          i === page
-                            ? "text-[rgb(200,169,110)]"
-                            : "text-[rgba(200,169,110,0.3)] hover:text-[rgba(200,169,110,0.6)]"
-                        }`}
+                                p-0 border-0 bg-transparent rounded-none transition-all duration-300 cursor-pointer
+                                ${
+                                  i === page
+                                    ? "text-[rgb(200,169,110)]"
+                                    : "text-[rgba(200,169,110,0.3)] hover:text-[rgba(200,169,110,0.6)]"
+                                }`}
           >
             {String(i + 1).padStart(2, "0")}
             {i === page && (
@@ -113,14 +110,10 @@ function MasonaryGallery() {
         <button
           onClick={() => changePage(Math.min(totalPages - 1, page + 1))}
           disabled={page === totalPages - 1}
-          className="w-6 h-6 flex items-center justify-center text-[0.65rem] text-[rgb(200,169,110)] rounded-full bg-white/5 hover:bg-white/10 transition"
+          className="w-6 h-6 flex items-center justify-center text-[0.65rem] text-[rgb(200,169,110)]
+                             rounded-full bg-white/5 hover:bg-white/10 transition disabled:opacity-50 cursor-pointer"
         >
-          {/* <ChevronRight
-            size={20}
-            strokeWidth={2.5}
-            className="text-[rgb(200,169,110)]"
-          /> */}
-          &rarr;
+          <ChevronRight />
         </button>
       </div>
     </>

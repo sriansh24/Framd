@@ -1,37 +1,37 @@
 // --------------------- Mountain -----------------------
-import MountFuji from "../../assets/Img/FeatureImage/Mountains/Mount-Fuji.webp";
-import KailashMount from "../../assets/Img/FeatureImage/Mountains/himalaya-mountain-2.webp";
-import MtFujiSpring from "../../assets/Img/FeatureImage/Mountains/mount-fuji-spring-time.webp";
-import SunsetHimalaya from "../../assets/Img/FeatureImage/Mountains/sunrise-in-himalaya.webp";
-import SunriseKailash from "../../assets/Img/FeatureImage/Mountains/mt-kailash.webp";
-import Sunrise from "../../assets/Img/FeatureImage/Mountains/sunset-snow-capped-mountains.webp";
-import MountainShot from "../../assets/Img/FeatureImage/Mountains/amazing-shot-mountain-sunset.webp";
-import MtEverest from "../../assets/Img/FeatureImage/Mountains/Mount-Everest-face.webp";
+import MountFuji from "../../assets/Img/MasonaryGallery/Mountains/Mount-Fuji.webp";
+import KailashMount from "../../assets/Img/MasonaryGallery/Mountains/himalaya-mountain-2.webp";
+import MtFujiSpring from "../../assets/Img/MasonaryGallery/Mountains/mount-fuji-spring-time.webp";
+import SunsetHimalaya from "../../assets/Img/MasonaryGallery/Mountains/sunrise-in-himalaya.webp";
+import SunriseKailash from "../../assets/Img/MasonaryGallery/Mountains/mt-kailash.webp";
+import Sunrise from "../../assets/Img/MasonaryGallery/Mountains/sunset-snow-capped-mountains.webp";
+import MountainShot from "../../assets/Img/MasonaryGallery/Mountains/amazing-shot-mountain-sunset.webp";
+import MtEverest from "../../assets/Img/MasonaryGallery/Mountains/Mount-Everest-face.webp";
 
 // ----------------------- Nature -----------------------
-import RambodaWaterfall from "../../assets/Img/FeatureImage/Nature/beautiful-ramboda-waterfall-sri-lanka-island_167946-169.webp";
-import CloudyWaterfall from "../../assets/Img/FeatureImage/Nature/cloudy-nature-near-waterfall.webp";
-import CoffeeValley from "../../assets/Img/FeatureImage/Nature/cool-coffee-india-tea-leaves-forest.webp";
-import IndianForest from "../../assets/Img/FeatureImage/Nature/indian-forest.webp";
-import RiverShot from "../../assets/Img/FeatureImage/Nature/amazing-shot-river-surrounded-by-beautiful-nature.webp";
-import VietnamWaterfall from "../../assets/Img/FeatureImage/Nature/wet-vietnam-mountain-flow-stream-rural.webp";
-import MorskieOkoTaatry from "../../assets/Img/FeatureImage/Nature/morskie-oko-tatry.webp";
+import RambodaWaterfall from "../../assets/Img/MasonaryGallery/Nature/beautiful-ramboda-waterfall-sri-lanka-island_167946-169.webp";
+import CloudyWaterfall from "../../assets/Img/MasonaryGallery/Nature/cloudy-nature-near-waterfall.webp";
+import CoffeeValley from "../../assets/Img/MasonaryGallery/Nature/cool-coffee-india-tea-leaves-forest.webp";
+import IndianForest from "../../assets/Img/MasonaryGallery/Nature/indian-forest.webp";
+import RiverShot from "../../assets/Img/MasonaryGallery/Nature/amazing-shot-river-surrounded-by-beautiful-nature.webp";
+import VietnamWaterfall from "../../assets/Img/MasonaryGallery/Nature/wet-vietnam-mountain-flow-stream-rural.webp";
+import MorskieOkoTaatry from "../../assets/Img/MasonaryGallery/Nature/morskie-oko-tatry.webp";
 
 // ----------------------- WildLife -----------------------
-import Rihnos from "../../assets/Img/FeatureImage/WildAnimals/white-rhinoceros-beautiful-nature-looking-habitat-wild.webp";
-import BengalTigers from "../../assets/Img/FeatureImage/WildAnimals/amazing-bengal-tigers.webp";
-import Lions from "../../assets/Img/FeatureImage/WildAnimals/jungle-king-lion.webp";
-import Tiger from "../../assets/Img/FeatureImage/WildAnimals/sumatran-tiger-nature-looking-habitat-zoo-wild-animals.webp";
-import Peacock from "../../assets/Img/FeatureImage/WildAnimals/peacock.webp";
-import PeacockBranch from "../../assets/Img/FeatureImage/WildAnimals/peacock-sitting-on-branch.webp";
-import PeacockGaze from "../../assets/Img/FeatureImage/WildAnimals/gaze-of-peacock.webp";
-import PeacockSideView from "../../assets/Img/FeatureImage/WildAnimals/white-peacock-side-view.webp";
-import WhitePeacock from "../../assets/Img/FeatureImage/WildAnimals/white-peacock.webp";
+import Rihnos from "../../assets/Img/MasonaryGallery/WildAnimals/white-rhinoceros-beautiful-nature-looking-habitat-wild.webp";
+import BengalTigers from "../../assets/Img/MasonaryGallery/WildAnimals/amazing-bengal-tigers.webp";
+import Lions from "../../assets/Img/MasonaryGallery/WildAnimals/jungle-king-lion.webp";
+import Tiger from "../../assets/Img/MasonaryGallery/WildAnimals/sumatran-tiger-nature-looking-habitat-zoo-wild-animals.webp";
+import Peacock from "../../assets/Img/MasonaryGallery/WildAnimals/peacock.webp";
+import PeacockBranch from "../../assets/Img/MasonaryGallery/WildAnimals/peacock-sitting-on-branch.webp";
+import PeacockGaze from "../../assets/Img/MasonaryGallery/WildAnimals/gaze-of-peacock.webp";
+import PeacockSideView from "../../assets/Img/MasonaryGallery/WildAnimals/white-peacock-side-view.webp";
+import WhitePeacock from "../../assets/Img/MasonaryGallery/WildAnimals/white-peacock.webp";
 
 // ----------------------- Streets -----------------------
-import KolkataRush from "../../assets/Img/FeatureImage/Streets/rush-hour-in-kolkata-streets.webp";
-import KoreaRush from "../../assets/Img/FeatureImage/Streets/rush-hour-korea.webp";
-import HeavyTraffice from "../../assets/Img/FeatureImage/Streets/heavy-traffic.webp";
+import KolkataRush from "../../assets/Img/MasonaryGallery/Streets/rush-hour-in-kolkata-streets.webp";
+import KoreaRush from "../../assets/Img/MasonaryGallery/Streets/rush-hour-korea.webp";
+import HeavyTraffice from "../../assets/Img/MasonaryGallery/Streets/heavy-traffic.webp";
 export const allPages = [
     // Page 1
     [
